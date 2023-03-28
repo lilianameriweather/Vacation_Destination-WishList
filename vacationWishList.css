@@ -1,0 +1,71 @@
+.title-wishlist {
+  color: #e0e0e0;
+  opacity: 1;
+  font-size: 3.5rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.bg-wishlist {
+  padding-top: 4.5rem;
+  padding-bottom: 7.5rem;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.center-items {
+  align-items: top;
+  justify-content: center;
+  display: flex;
+}
+
+.text-desc {
+  color: #e0e0e0;
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+.container-title {
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: #313131;
+  padding-bottom: 1.5rem;
+}
+
+.card-style {
+  box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  border-radius: 0.25rem !important;
+  margin-bottom: 3rem !important;
+  width: 18rem;
+  padding: 1rem !important;
+}
+
+.clone-container {
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
+
+.btn-light {
+  color: #fff;
+  background-color: #855dc5;
+  border-color: #855dc5;
+}
+
+.card-btn {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submitBtn {
+  width: 100%;
+}
+
+.card-price {
+  font-style: italic;
+}
+
+.bg {
+  background-color: rgb(241, 241, 241);
+}
