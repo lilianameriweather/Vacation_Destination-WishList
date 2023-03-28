@@ -9,7 +9,8 @@
 .bg-wishlist {
   padding-top: 4.5rem;
   padding-bottom: 7.5rem;
-  background-color: #1f1f1f;
+  background-color: #212a30;
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -30,7 +31,7 @@
 .container-title {
   font-size: 1.7rem;
   font-weight: 400;
-  color: #313131;
+  color: #202020;
   padding-bottom: 1.5rem;
 }
 
@@ -49,8 +50,8 @@
 
 .btn-light {
   color: #fff;
-  background-color: #855dc5;
-  border-color: #855dc5;
+  background-color: #e08942;
+  border-color: #e08942;
 }
 
 .card-btn {
@@ -66,6 +67,8 @@
   font-style: italic;
 }
 
-.bg {
-  background-color: rgb(241, 241, 241);
+.footer {
+  background: #c7c7c7;
+  padding-bottom: 8rem;
+  margin-top: 10rem;
 }
