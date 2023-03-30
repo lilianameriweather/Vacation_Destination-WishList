@@ -1,24 +1,8 @@
-window.onload = function () {
-  console.log("page loaded.....");
+import { searchGifs } from "./giphy.js";
 
-  document
-    .querySelector("#destinationForm")
-    .addEventListener("submit", handleSubmit);
-  document
-    .querySelector(".clone-container")
-    .addEventListener("click", function (e) {
-      if (e.target.classList.contains("deleteItem")) {
-        onDeleteButtonClicked.call(e.target);
-      }
-    });
-  document
-    .querySelector(".clone-container")
-    .addEventListener("click", function (e) {
-      if (e.target.classList.contains("editItem")) {
-        onEditButtonClicked.call(e.target);
-      }
-    });
-};
+document
+  .querySelector("#destinationForm")
+  .addEventListener("submit", handleSubmit);
 
 //-------------------------FORM---------------------------
 
@@ -33,6 +17,16 @@ function handleSubmit(e) {
   data.imageUrl = document.querySelector("#imageUrl").value;
   data.description = document.querySelector("#description").value;
   data.cost = document.querySelector("#cost").value;
+
+  // Validate the URL input
+  var urlInput = document.querySelector("#imageUrl");
+  if (isValidUrl(urlInput.value)) {
+    data.imageUrl = urlInput.value;
+  } else {
+    // Make a Giphy API call instead of using the invalid URL
+    searchGifs(data.destinationName, data.location);
+    return false; // Stop the form submission
+  }
 
   console.log("Data passed to card....", data);
   var newCard = createCard(data);
@@ -52,6 +46,12 @@ function resetForm(values) {
   for (var i = 0; i < values.length; i++) {
     values.elements[i].value = "";
   }
+}
+
+// Validate Url
+function isValidUrl(url) {
+  var pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
+  return pattern.test(url);
 }
 
 //-------------------CARD---------------------------
@@ -82,31 +82,4 @@ function getTemplate() {
   return tempclone;
 }
 
-// EDIT CARD // WINDOW PROMPT
-function onEditButtonClicked() {
-  var card = this.closest(".card");
-  var destinationName = card.querySelector(".card-title");
-  var location = card.querySelector(".card-subtitle");
-  var imageUrl = card.querySelector(".card-img-top");
-  var description = card.querySelector(".card-text");
-
-  var newDestinationName = window.prompt("Enter new name");
-  var newLocation = window.prompt("Enter new location");
-  var newImageUrl = window.prompt("Enter new image url");
-  var newDescription = window.prompt("Enter new description");
-
-  if (newDestinationName >= 2) {
-    destinationName.textContent = newDestinationName;
-  }
-  if (newLocation >= 2) {
-    location.textContent = newLocation;
-  }
-  imageUrl.setAttribute("src", newImageUrl);
-  description.textContent = newDescription;
-}
-
-//DELETE CLICKED CARD
-function onDeleteButtonClicked() {
-  console.log("deleting card....");
-  this.closest(".card").remove();
-}
+export { createCard, getTemplate, resetForm, handleSubmit };
