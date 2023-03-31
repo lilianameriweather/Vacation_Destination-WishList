@@ -1,5 +1,5 @@
 import { searchGifs } from "./giphy.js";
-import { giphy } from "./script.js";
+import { searchImages } from "./searchImage.js";
 
 document
   .querySelector("#destinationForm")
@@ -19,39 +19,26 @@ function handleSubmit(e) {
   data.description = document.querySelector("#description").value;
   data.cost = document.querySelector("#cost").value;
 
+  // create newCard variable
+  let newCard = null;
+
   // Validate the URL input
   var urlInput = document.querySelector("#imageUrl");
 
   if (urlInput.value && isValidUrl(urlInput.value)) {
     data.imageUrl = urlInput.value;
+    newCard = createCard(data);
   } else {
     // Make a Giphy API call instead of using the invalid URL
-    //searchGifs(data.destinationName, data.location);
-
-    let newCard = null;
-
-    searchGifs(data.destinationName, data.location)
-      .then((giphyUrl) => {
-        console.log("from HandleSubmit", giphyUrl);
-        data.imageUrl = giphyUrl;
-        newCard = createCard(data);
+    searchImages(data.destinationName, data.location)
+      .then((searchedUrl) => {
+        console.log("from HandleSubmit", searchedUrl);
+        newCard = createCard(data, searchedUrl);
       })
       .catch((err) => {
         console.log(err);
       });
-
-    // try {
-    //   let url = await searchGifs(data.destinationName, data.location);
-    //   console.log();
-    //   console.log("from handlesmt", url);
-    // }
-    // catch {
-    //   console.log("no URL, getting gif.......");
-    // }
   }
-
-  console.log("Data passed to card....", data);
-  newCard = createCard(data);
 
   let cards = document.querySelector(".clone-container").children;
 
@@ -60,7 +47,6 @@ function handleSubmit(e) {
   }
 
   resetForm(e.target);
-  return newCard;
 }
 
 // CLEAR FORM
@@ -79,10 +65,10 @@ function isValidUrl(url) {
 //-------------------CARD---------------------------
 
 // CREATE FROM TEMPLATE
-function createCard(formData, imageUrl = null) {
+function createCard(formData, searchedUrl = null) {
   console.log(formData);
   var template = getTemplate(); //card
-  console.log("Creating temp........", template);
+  console.log("Creating temp........");
 
   template.querySelector(".card-title").textContent = formData.destinationName;
   template.querySelector(".card-subtitle").textContent = formData.location;
@@ -91,8 +77,8 @@ function createCard(formData, imageUrl = null) {
     template
       .querySelector(".card-img-top")
       .setAttribute("src", formData.imageUrl);
-  } else if (imageUrl) {
-    template.querySelector(".card-img-top").setAttribute("src", imageUrl);
+  } else if (searchedUrl) {
+    template.querySelector(".card-img-top").setAttribute("src", searchedUrl);
   }
   template.querySelector(".card-text").textContent = formData.description;
   template.querySelector(".card-price").textContent = formData.cost;

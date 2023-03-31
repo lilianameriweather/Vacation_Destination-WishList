@@ -17,8 +17,8 @@ export function searchGifs(destinationName, location) {
 
 export const onGetGiphySuccessResponse = (data) => {
   console.log(data);
-  console.log(data[0].url);
-  const giphyUrl = data[0].url;
+  console.log(data[0].embed_url);
+  const giphyUrl = data[0].embed_url;
 
   return giphyUrl;
 };
