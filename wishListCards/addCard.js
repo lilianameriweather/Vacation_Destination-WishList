@@ -1,4 +1,5 @@
 import { searchGifs } from "./giphy.js";
+import { giphy } from "./script.js";
 
 document
   .querySelector("#destinationForm")
@@ -20,18 +21,39 @@ function handleSubmit(e) {
 
   // Validate the URL input
   var urlInput = document.querySelector("#imageUrl");
-  if (isValidUrl(urlInput.value)) {
+
+  if (urlInput.value && isValidUrl(urlInput.value)) {
     data.imageUrl = urlInput.value;
   } else {
     // Make a Giphy API call instead of using the invalid URL
-    searchGifs(data.destinationName, data.location);
-    return false; // Stop the form submission
+    //searchGifs(data.destinationName, data.location);
+
+    let newCard = null;
+
+    searchGifs(data.destinationName, data.location)
+      .then((giphyUrl) => {
+        console.log("from HandleSubmit", giphyUrl);
+        data.imageUrl = giphyUrl;
+        newCard = createCard(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // try {
+    //   let url = await searchGifs(data.destinationName, data.location);
+    //   console.log();
+    //   console.log("from handlesmt", url);
+    // }
+    // catch {
+    //   console.log("no URL, getting gif.......");
+    // }
   }
 
   console.log("Data passed to card....", data);
-  var newCard = createCard(data);
+  newCard = createCard(data);
 
-  var cards = document.querySelector(".clone-container").children;
+  let cards = document.querySelector(".clone-container").children;
 
   if (cards.length > 0) {
     document.querySelector("#title").innerHTML = "My Wishlist";
@@ -57,16 +79,21 @@ function isValidUrl(url) {
 //-------------------CARD---------------------------
 
 // CREATE FROM TEMPLATE
-function createCard(formData) {
+function createCard(formData, imageUrl = null) {
   console.log(formData);
   var template = getTemplate(); //card
   console.log("Creating temp........", template);
 
   template.querySelector(".card-title").textContent = formData.destinationName;
   template.querySelector(".card-subtitle").textContent = formData.location;
-  template
-    .querySelector(".card-img-top")
-    .setAttribute("src", formData.imageUrl);
+
+  if (formData.imageUrl) {
+    template
+      .querySelector(".card-img-top")
+      .setAttribute("src", formData.imageUrl);
+  } else if (imageUrl) {
+    template.querySelector(".card-img-top").setAttribute("src", imageUrl);
+  }
   template.querySelector(".card-text").textContent = formData.description;
   template.querySelector(".card-price").textContent = formData.cost;
   document.querySelector(".clone-container").appendChild(template);
