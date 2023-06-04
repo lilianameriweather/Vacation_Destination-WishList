@@ -1,3 +1,4 @@
+// SEARCH IMAGES BASED ON FORM DATA: DESTINATION NAME AND LOCATION
 export function searchImages(destinationName, location) {
   return new Promise((resolve, reject) => {
     const accessKey = "FnwvubE4GY5xmwrm37hiaICum7upI1gRXRZKXuKxeJA";
@@ -14,6 +15,7 @@ export function searchImages(destinationName, location) {
   });
 }
 
+// RANDOMIZE IMAGE ON SUCCESS
 export const onGetImageSuccessResponse = (images) => {
   console.log(images);
   const randomIndex = Math.floor(Math.random() * images.length);
@@ -23,5 +25,5 @@ export const onGetImageSuccessResponse = (images) => {
 };
 
 export const onGetImageErrResponse = (error) => {
-  console.error("Image might not exist...", error);
+  console.error("Image might not exist based on user input...", error);
 };
