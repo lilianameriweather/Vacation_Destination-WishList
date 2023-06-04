@@ -5,8 +5,7 @@ document
   .querySelector("#destinationForm")
   .addEventListener("submit", handleSubmit);
 
-//-------------------------FORM---------------------------
-
+//-----------------FORM----------------------
 // CAPTURE FORM VALUES
 function handleSubmit(e) {
   e.preventDefault();
@@ -19,17 +18,17 @@ function handleSubmit(e) {
   data.description = document.querySelector("#description").value;
   data.cost = document.querySelector("#cost").value;
 
-  // create newCard variable
+  // CREATE NEWCARD VARIABLE
   let newCard = null;
 
-  // Validate the URL input
+  // VALIDATE URL INPUT
   var urlInput = document.querySelector("#imageUrl");
 
   if (urlInput.value && isValidUrl(urlInput.value)) {
     data.imageUrl = urlInput.value;
     newCard = createCard(data);
   } else {
-    // Make a Giphy API call instead of using the invalid URL
+    // MAKE GIPHY API CALL INSTEAD OF USING INVALID URL
     searchImages(data.destinationName, data.location)
       .then((searchedUrl) => {
         console.log("from HandleSubmit", searchedUrl);
@@ -49,26 +48,26 @@ function handleSubmit(e) {
   resetForm(e.target);
 }
 
-// CLEAR FORM
+// RESET FORM AFTER SUBMISSION
 function resetForm(values) {
   for (var i = 0; i < values.length; i++) {
     values.elements[i].value = "";
   }
 }
 
-// Validate Url
+// VALIDATE URL PATTERN
 function isValidUrl(url) {
   var pattern = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
   return pattern.test(url);
 }
 
-//-------------------CARD---------------------------
+//----------------CARD---------------------
 
 // CREATE FROM TEMPLATE
 function createCard(formData, searchedUrl = null) {
   console.log(formData);
-  var template = getTemplate(); //card
-  console.log("Creating temp........");
+  var template = getTemplate(); // CARD
+  console.log("Creating template....");
 
   template.querySelector(".card-title").textContent = formData.destinationName;
   template.querySelector(".card-subtitle").textContent = formData.location;
@@ -87,11 +86,11 @@ function createCard(formData, searchedUrl = null) {
 
 //TEMPLATE CLONE
 function getTemplate() {
-  console.log("cloning template.......");
-  var template = document.createElement("template"); // store in this one
-  var htmlFromTemp = document.querySelector("#itemTemplate").innerHTML; // retrive html
-  template.innerHTML = htmlFromTemp; //attach html
-  var tempclone = document.importNode(template.content, true); // clone node and children
+  console.log("cloning template....");
+  var template = document.createElement("template"); // VARIABLE TO STORE IN
+  var htmlFromTemp = document.querySelector("#itemTemplate").innerHTML; // RETRIEVE HTML
+  template.innerHTML = htmlFromTemp; // ATTATCH HTML
+  var tempclone = document.importNode(template.content, true); // CLONE NODE AND CHILDREN
   return tempclone;
 }
 
