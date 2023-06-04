@@ -1,3 +1,4 @@
+// FETCH GIPHY BASED ON FORM DATA: DESTINATION NAME AND LOCATION
 export function searchGifs(destinationName, location) {
   return new Promise((resolve, reject) => {
     const apiKey = "LwTC1g5nOu9rDaMFbuuKoaTYaPE9IViN";
