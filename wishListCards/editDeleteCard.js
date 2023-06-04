@@ -1,3 +1,4 @@
+// EVENT LISTER // DELETE CARD
 document
   .querySelector(".clone-container")
   .addEventListener("click", function (e) {
@@ -5,6 +6,8 @@ document
       onDeleteButtonClicked.call(e.target);
     }
   });
+
+// EVENT LISTENER // EDIT CARD
 document
   .querySelector(".clone-container")
   .addEventListener("click", function (e) {
@@ -36,7 +39,7 @@ function onEditButtonClicked() {
   description.textContent = newDescription;
 }
 
-//DELETE CLICKED CARD
+// DELETE CURRENT CARD
 function onDeleteButtonClicked() {
   console.log("deleting card....");
   this.closest(".card").remove();
