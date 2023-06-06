@@ -28,7 +28,7 @@ function handleSubmit(e) {
     data.imageUrl = urlInput.value;
     newCard = createCard(data);
   } else {
-    // MAKE GIPHY API CALL INSTEAD OF USING INVALID URL
+    // MAKE IMAGE SEARCH API CALL INSTEAD OF USING INVALID URL
     searchImages(data.destinationName, data.location)
       .then((searchedUrl) => {
         console.log("from HandleSubmit", searchedUrl);
