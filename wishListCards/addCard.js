@@ -14,9 +14,13 @@ function handleSubmit(e) {
   var data = {};
   data.destinationName = document.querySelector("#destinationName").value;
   data.location = document.querySelector("#location").value;
+  data.date = document.querySelector("#date").value;
   data.imageUrl = document.querySelector("#imageUrl").value;
+  data.kidScore = document.querySelector("#kidScore").value;
   data.description = document.querySelector("#description").value;
   data.cost = document.querySelector("#cost").value;
+
+  console.log(data);
 
   // CREATE NEWCARD VARIABLE
   let newCard = null;
@@ -71,7 +75,7 @@ function createCard(formData, searchedUrl = null) {
 
   template.querySelector(".card-title").textContent = formData.destinationName;
   template.querySelector(".card-subtitle").textContent = formData.location;
-
+  template.querySelector(".card-date").textContent = formData.date;
   if (formData.imageUrl) {
     template
       .querySelector(".card-img-top")
@@ -79,8 +83,9 @@ function createCard(formData, searchedUrl = null) {
   } else if (searchedUrl) {
     template.querySelector(".card-img-top").setAttribute("src", searchedUrl);
   }
-  template.querySelector(".card-text").textContent = formData.description;
   template.querySelector(".card-price").textContent = formData.cost;
+  template.querySelector(".card-range").textContent = formData.kidScore;
+  template.querySelector(".card-text").textContent = formData.description;
   document.querySelector(".clone-container").appendChild(template);
 }
 

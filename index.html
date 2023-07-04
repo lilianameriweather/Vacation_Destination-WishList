@@ -34,7 +34,7 @@
       <h5 class="p-5">Create your wishlist</h5>
     </div>
 
-    <div class="container col-md-8">
+    <div class="container col-md-11">
       <div class="row center-items">
         <div class="mb-12 mb-lg-0 col-xl-4 col-lg-4 col-md-8 col-sm-8">
           <div class="card">
@@ -49,27 +49,37 @@
                       required
                       minlength="2"
                       type="text"
-                      class="form-control form-control-lg"
+                      class="form-control form-control-sm"
                       id="destinationName"
                       placeholder="e.g., Childrens Museum"
                     />
                   </div>
                   <div class="form-group mb-3">
-                    <label for="location">Location</label>
+                    <label for="location" class="form-label">Location</label>
                     <input
                       required
                       minlength="2"
                       type="text"
-                      class="form-control form-control-lg"
+                      class="form-control form-control-sm"
                       id="location"
                       placeholder="e.g., San Diego"
                     />
                   </div>
                   <div class="form-group mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input 
+                      required 
+                      type="date" 
+                      id="date" 
+                      name="date"
+                      class="form-control form-control-sm"
+                      />
+                  </div>
+                  <div class="form-group mb-3">
                     <label for="imageUrl" class="form-label">Photo</label>
                     <input
                       type="url"
-                      class="form-control form-control-lg"
+                      class="form-control form-control-sm"
                       id="imageUrl"
                       placeholder="Image Url"
                     />
@@ -78,7 +88,7 @@
                     <label for="cost" class="form-label">Cost</label>
                     <select
                       id="cost"
-                      class="form-select form-control"
+                      class="form-select form-control form-control-sm"
                       aria-label="Default select example"
                     >
                       <option selected>Select Cost</option>
@@ -91,14 +101,24 @@
                       <option value="$500-1000">$500-1000</option>
                     </select>
                   </div>
-
+                  <div class="form-group mb-3">
+                    <label for="score" class="form-label">Kid-Friendly Score (0-100):</label>
+                    <input 
+                      type="range" 
+                      id="kidScore" 
+                      name="kidScore" 
+                      min="0" 
+                      max="100"
+                      class="form-control form-control-sm"
+                      >
+                  </div>
                   <div class="form-group mb-3">
                     <label for="description" class="form-label"
                       >Description</label
                     >
                     <textarea
                       type="text"
-                      class="form-control form-control-lg"
+                      class="form-control form-control-sm"
                       id="description"
                       placeholder="Description"
                     ></textarea>
@@ -118,7 +138,7 @@
           <!------------CLONE-CONTAINER------------->
           <div class="row center-items clone-container"></div>
 
-          <!----------TEMPLATE-HIDING----------------->
+          <!---------- TEMPLATE ----------------->
           <script class="p-3" id="itemTemplate" type="text/template">
             <div class="card col-md-4 shadow mb-5 bg-body-tertiary" style="width: 18rem;">
               <div class="row">
@@ -130,17 +150,33 @@
               <div class="row no-gutters">
                   <div class="col-md-12">
                       <div class="card-body">
-                          <h5 class="card-title pt-3 pb-2 card-name">Destination Name</h5>
-                          <h4 class="card-subtitle mb-2 text-muted location">Location</h6>
-                          <p class="card-text">Description</p>
-                          <p class="card-price">$50</p>
-
+                          <h5 class="card-title pt-2">Destination Name</h5>
+                          <p class="card-subtitle text-muted small pb-3">Location</p>
+                          <div class="row center-items">
+                            <p class="small">Date: </p>
+                            <p class="card-date small">Date</p>
+                          </div>
+                          <div class="row center-items">
+                            <p class="small">Price range: </p>
+                            <p class="card-price small">$0</p>
+                          </div>
+                          <div class="row center-items"> 
+                              <p class="small">Kid-friendly score: </p>
+                              <p class="card-range small"> 0/100</p>
+                              <p class="small"> /100 </p>
+                          </div>
+                          <div class="row center-items">
+                            <p class="small">Description: </p>
+                            <p class="card-text small">Description</p>
+                          </div>
                       </div>
-                      <div class="btn-container ">
+                      <div class="row center-items"> 
+                      <div class="btn-container">
                         <button type="button" class="card-btn btn editItem mt-2" id="editItem">Edit</button>
                         <button type="button" class="card-btn btn deleteItem mt-2" id="deleteItem">Remove</button>
                       </div>
-                      </div>
+                    </div>
+                    </div>
                   </div>
               </div>
           </script>
